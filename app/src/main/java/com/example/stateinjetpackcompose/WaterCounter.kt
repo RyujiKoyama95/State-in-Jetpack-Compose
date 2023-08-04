@@ -23,7 +23,7 @@ fun WaterCounter(modifier: Modifier = Modifier) {
         Button(
             onClick = { count++ },
             modifier = Modifier.padding(top = 8.dp),
-            enabled = count > 10
+            enabled = count < 10
         ) {
             Text(text = "Add one")
         }
