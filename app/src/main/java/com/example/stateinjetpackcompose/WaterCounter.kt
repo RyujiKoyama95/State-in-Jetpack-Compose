@@ -20,7 +20,7 @@ fun WaterCounter(modifier: Modifier = Modifier) {
     Column(modifier = modifier.padding(16.dp)) {
         var count by remember { mutableStateOf(0) }
         if (count > 0) {
-            // showTask=falseの状態で、WellnessTaskItem#onClose()→Button#count=0→Button#count++が走ると、showTask=trueに再初期化される
+            // WellnessTaskItem#onClose()が走り、showTask=falseの状態で、Button#count=0→Button#count++が走ると、showTask=trueに再初期化される
             // これは、Button#count=0が走ると、再コンポジションが発生するが、val showTaskのコードが呼び出されなかったため、showTaskの状態は破棄される
 //            var showTask by remember { mutableStateOf(true) }
 //            Log.d("WaterCounter", "showTask=$showTask")
