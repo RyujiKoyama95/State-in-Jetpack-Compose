@@ -8,28 +8,22 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.toMutableStateList
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 
 @Composable
-fun WellnessScreen(modifier: Modifier = Modifier) {
+fun WellnessScreen(
+    modifier: Modifier = Modifier,
+    viewModel: WellnessViewModel = viewModel()
+) {
     Column(
         modifier = modifier
     ) {
         StatefulCounter()
         Spacer(modifier = Modifier.padding(10.dp))
 
-        val list = remember { getWellnessTasks().toMutableStateList() }
         WellnessTasksList(
-            list = list,
-            onCloseTask = { task -> list.remove(task) }
+            list = viewModel.tasks,
+            onCloseTask = { task -> viewModel.remove(task) }
         )
-    }
-}
-
-/**
- *  Create dummy data
- */
-private fun getWellnessTasks(): List<WellnessTask> {
-    return List(30) { i ->
-        WellnessTask(i, "Task #$i")
     }
 }
