@@ -53,3 +53,41 @@ fun WaterCounter(modifier: Modifier = Modifier) {
         }
     }
 }
+
+/**
+ *  StatelessCounterからStatefulCounterにcountをホイスティングする
+ *
+ *  状態をホイスティングする場合、状態の移動先を決定するために役立つ3つのルールがある
+ *  1.少なくとも、状態を使用するすべてのコンポーザブルの最下位レベルの共通の親レベル（読み取り）に状態をホイスティングする
+ *  2.少なくとも、変更可能な最上位レベル（書き込み）に状態をホイスティングする
+ *  3.同じイベントに応じて2つの状態が変更される場合は、それらを同じレベルにホイスティングする必要がある
+ */
+@Composable
+fun StatelessCounter(
+    count: Int,
+    onIncrement: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    Column(
+        modifier = Modifier.padding(16.dp)
+    ) {
+        if (count > 0) {
+            Text(text = "You've had $count glasses.")
+        }
+        Button(
+            onClick = { onIncrement },
+            modifier = Modifier.padding(top = 8.dp),
+            enabled = count < 10
+        ) {
+            Text(text = "Add one")
+        }
+    }
+}
+
+@Composable
+fun StatefulCounter(
+    modifier: Modifier = Modifier
+) {
+    var count by rememberSaveable{ mutableStateOf(0) }
+    StatelessCounter(count = count, onIncrement = { count++ }, modifier)
+}
