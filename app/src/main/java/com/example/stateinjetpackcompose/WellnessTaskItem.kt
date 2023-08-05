@@ -11,7 +11,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -44,12 +44,20 @@ fun WellnessTaskItem(
     }
 }
 
+/**
+ *  checkedState は、プライベート変数と同様に、各 WellnessTaskItem コンポーザブルに独立して属します。
+ *  checkedState を変更すると、LazyColumn 内のすべての WellnessTaskItem インスタンスではなく、
+ *  WellnessTaskItem のそのインスタンスのみが再コンポーズされます。
+ *
+ *  LazyColumn 上のアイテムの場合、アクティビティやプロセスの再作成同様に
+ *  rememberでは、スクロールするとアイテムはコンポジションから離れてしまい、表示されなくなります
+ */
 @Composable
 fun WellnessTaskItem(
     taskName: String,
     modifier: Modifier = Modifier
 ) {
-    var checkedState by remember { mutableStateOf(false) }
+    var checkedState by rememberSaveable { mutableStateOf(false) }
     WellnessTaskItem(
         taskName = taskName,
         isChecked = checkedState,
