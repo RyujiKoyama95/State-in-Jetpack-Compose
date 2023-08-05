@@ -18,7 +18,10 @@ fun WellnessScreen(modifier: Modifier = Modifier) {
         Spacer(modifier = Modifier.padding(10.dp))
 
         val list = remember { getWellnessTasks().toMutableStateList() }
-        WellnessTasksList(list = list)
+        WellnessTasksList(
+            list = list,
+            onCloseTask = { task -> list.remove(task) }
+        )
     }
 }
 
