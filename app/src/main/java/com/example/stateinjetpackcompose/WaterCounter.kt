@@ -18,6 +18,7 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun WaterCounter(modifier: Modifier = Modifier) {
     Column(modifier = modifier.padding(16.dp)) {
+        // rememberは再コンポーズ後は状態を保持するが、設定の変更豪(Activityの再作成)は保持されない
         var count by remember { mutableStateOf(0) }
         if (count > 0) {
             // WellnessTaskItem#onClose()が走り、showTask=falseの状態で、Button#count=0→Button#count++が走ると、showTask=trueに再初期化される
