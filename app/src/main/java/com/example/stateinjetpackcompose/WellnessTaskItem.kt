@@ -52,8 +52,12 @@ fun WellnessTaskItem(
  *  LazyColumn 上のアイテムの場合、アクティビティやプロセスの再作成同様に
  *  rememberでは、スクロールするとアイテムはコンポジションから離れてしまい、表示されなくなります
  */
+
+/**
+ * CheckBox の状態がリストレベルにホイスティングされるため、ステートフルなメソッドは不要になりました。
+ */
 @Composable
-fun WellnessTaskItem(
+fun StatefulWellnessTaskItem(
     taskName: String,
     modifier: Modifier = Modifier,
     onClose: () -> Unit
