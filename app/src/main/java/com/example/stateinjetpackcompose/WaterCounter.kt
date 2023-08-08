@@ -1,5 +1,6 @@
 package com.example.stateinjetpackcompose
 
+import android.util.Log
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
@@ -73,12 +74,13 @@ fun StatelessCounter(
             Text(text = "You've had $count glasses.")
         }
         Button(
-            onClick = { onIncrement },
+            onClick = { onIncrement() },
             modifier = Modifier.padding(top = 8.dp),
             enabled = count < 10
         ) {
             Text(text = "Add one")
         }
+        Log.d("StatelessCounter", "count=$count")
     }
 }
 
