@@ -18,7 +18,6 @@ fun WellnessScreen(
     ) {
         StatefulCounter()
         Spacer(modifier = Modifier.padding(10.dp))
-
         WellnessTasksList(
             list = viewModel.tasks,
             onCloseTask = { task -> viewModel.remove(task) },
